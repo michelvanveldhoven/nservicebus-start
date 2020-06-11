@@ -1,4 +1,5 @@
 ﻿using Messages;
+using Messages.Commands;
 using NServiceBus;
 using NServiceBus.Logging;
 using System;

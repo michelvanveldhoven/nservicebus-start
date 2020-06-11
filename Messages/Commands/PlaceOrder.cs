@@ -1,7 +1,7 @@
 ﻿using NServiceBus;
 using System;
 
-namespace Messages
+namespace Messages.Commands
 {
     public class PlaceOrder : ICommand
     {
