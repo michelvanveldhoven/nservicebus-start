@@ -12,6 +12,8 @@ namespace Sales
             Console.Title = "Sales Endpoint";
             var endpointConfiguration = new EndpointConfiguration("Sales");
             var transport = endpointConfiguration.UseTransport<LearningTransport>();
+            var persistence = endpointConfiguration.UsePersistence<LearningPersistence>();
+
             var endpointInstance = await Endpoint.Start(endpointConfiguration);
 
             Console.WriteLine("Press Enter to quit");

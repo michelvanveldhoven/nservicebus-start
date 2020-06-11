@@ -18,6 +18,7 @@ namespace ClientUI
             var transport = endpointConfiguration.UseTransport<LearningTransport>();
             var routing = transport.Routing();
             routing.RouteToEndpoint(typeof(PlaceOrder), "Sales");
+            routing.RouteToEndpoint(typeof(CancelOrder), "Sales");
 
             var endpointInstance = await Endpoint.Start(endpointConfiguration);
 
@@ -32,9 +33,11 @@ namespace ClientUI
 
         static async Task RunLoop(IEndpointInstance endpointInstance)
         {
+            var lastOrder = string.Empty;
+
             while (true)
             {
-                log.Info("Press 'P' to place an order, or 'Q' to quit the program");
+                log.Info("Press 'P' to place an order, Press 'C' to cancel a placed order, or 'Q' to quit the program");
                 var key = Console.ReadKey();
                 Console.WriteLine();
 
@@ -47,7 +50,16 @@ namespace ClientUI
                         };
                         log.Info($"Sending PlaceOrder command, OrderId {command.OrderId}");
                         //await endpointInstance.SendLocal(command);
+                        lastOrder = command.OrderId;
                         await endpointInstance.Send(command);
+                        break;
+                    case ConsoleKey.C:
+                        var cancelCommand = new CancelOrder
+                        {
+                            OrderId = lastOrder
+                        };
+                        await endpointInstance.Send(cancelCommand);
+                        log.Info($"Sent a correlated message to {cancelCommand.OrderId}");
                         break;
                     case ConsoleKey.Q:
                         return;

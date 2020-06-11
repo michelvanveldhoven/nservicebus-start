@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace Sales.Handlers
 {
-    public class PlaceOrderHandler : IHandleMessages<PlaceOrder>
-    {
-        static ILog log = LogManager.GetLogger<PlaceOrderHandler>();
+    //public class PlaceOrderHandler : IHandleMessages<PlaceOrder>
+    //{
+    //    static ILog log = LogManager.GetLogger<PlaceOrderHandler>();
 
-        public Task Handle(PlaceOrder message, IMessageHandlerContext context)
-        {
-            log.Info($"Received PlaceOrder, Orderid: {message.OrderId}");
+    //    public Task Handle(PlaceOrder message, IMessageHandlerContext context)
+    //    {
+    //        log.Info($"Received PlaceOrder, Orderid: {message.OrderId}");
 
-            var orderPlaced = new OrderPlaced
-            {
-                OrderId = message.OrderId
-            };
+    //        var orderPlaced = new OrderPlaced
+    //        {
+    //            OrderId = message.OrderId
+    //        };
 
-            return context.Publish(orderPlaced);
+    //        return context.Publish(orderPlaced);
 
-        }
-    }
+    //    }
+    //}
 }
