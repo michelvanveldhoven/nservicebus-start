@@ -11,7 +11,10 @@ namespace Shipping
             Console.Title = "Shipping";
             var endppointConfiguration = new EndpointConfiguration("Shipping");
             var transport = endppointConfiguration.UseTransport<LearningTransport>();
+            var persistence = endppointConfiguration.UsePersistence<LearningPersistence>();
+
             var endpointInstance = await Endpoint.Start(endppointConfiguration);
+            
 
             Console.WriteLine("Press Enter to quit");
             Console.ReadLine();
